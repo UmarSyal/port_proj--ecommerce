@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    <div class="row">
+        {% for product in products %}
+            <div class="col-4">
+                <div class="card" style="width: 20rem;">
+                    {% if product.image %}
+                        <a href="{{ product.get_absolute_url }}">
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }} logo">
+                        </a>
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ product.name }}</h4>
+                        <p class="card-text">{{ product.description|linebreaks|truncatewords:14 }}</p>
+                        
+                        <div class="text-center">
+                            <a href="{{ product.get_absolute_url }}" class="btn btn-primary my-2">View</a>
+                            {% comment %} {% include "products/snippets/update-cart.html" with product=instance cart=cart %} {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>    
+{% endblock content %}
